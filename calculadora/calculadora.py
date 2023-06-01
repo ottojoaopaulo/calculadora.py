@@ -12,10 +12,47 @@ class tela():
         self.HEIGHT=3
         self.FONTE="Arial 14 bold"
 
+    # atualiza o display da calculadora
         def atualizar(auxBt):
             self.Res+=auxBt
+            # print(self.Res)
             self.auxResultado.set(self.Res)
 
+
+        def calcular(self):
+            Digitos=[]
+            Oper=[]
+            Num=[]
+            for i in self.Res:
+                if i.isdigit():
+                   Digitos.append(i)
+                else: 
+                    Oper.append(i)
+                    Digitos.append("*")
+            print(Oper)
+            print(Digitos)
+            NumStr="".join(Digitos)
+            NumStr=NumStr.split("*") 
+            print(NumStr)
+                        
+
+
+    # operacoes
+            if Oper[0]=="+":
+                ResTotal=int(NumStr[0])+int(NumStr[1])
+
+            if Oper[0]=="-":
+                ResTotal=int(NumStr[0])-int(NumStr[1]) 
+
+            if Oper[0]=="*":
+                ResTotal=int(NumStr[0])*int(NumStr[1]) 
+
+            if Oper[0]=="/":
+                ResTotal=round(int(NumStr[0])/int(NumStr[1]),2)
+
+
+            self.auxResultado.set(str(ResTotal))
+            self.Res=[]
 
     # label resultado - Display da calculadora
         self.auxResultado=tk.StringVar()
@@ -115,10 +152,10 @@ class tela():
         self.bt13=tk.Button(self.tela,textvariable=self.auxBt13, width=self.WIDTH, height=self.HEIGHT, bg="light blue",font=self.FONTE, command=lambda: atualizar(self.auxBt13.get()))
         self.bt13.grid(row=5, column=1, padx=2, pady=2)
 
-    # botao 14
+    # # botao 14
         self.auxBt14=tk.StringVar()
         self.auxBt14.set("=")
-        self.bt14=tk.Button(self.tela,textvariable=self.auxBt14, width=self.WIDTH, height=self.HEIGHT, bg="light blue",font=self.FONTE, command="none")
+        self.bt14=tk.Button(self.tela,textvariable=self.auxBt14, width=self.WIDTH, height=self.HEIGHT, bg="light blue",font=self.FONTE, command= lambda: calcular(self))
         self.bt14.grid(row=5, column=2, padx=2, pady=2)
 
 
